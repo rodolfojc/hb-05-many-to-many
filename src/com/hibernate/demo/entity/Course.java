@@ -41,14 +41,9 @@ public class Course {
 	@JoinColumn(name="course_id")
 	private List<Review> reviews;
 	
-	public List<Review> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(List<Review> reviews) {
-		this.reviews = reviews;
-	}
-
+	private List<Student> students;
+	
+	
 	public Course() {
 		
 	}
@@ -80,6 +75,22 @@ public class Course {
 	public void setInstructor(Instructor instructor) {
 		this.instructor = instructor;
 	}
+	
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+	
+	public List<Student> getStudents() {
+		return students;
+	}
+
+	public void setStudents(List<Student> students) {
+		this.students = students;
+	}
 
 	@Override
 	public String toString() {
@@ -93,6 +104,16 @@ public class Course {
 		}
 		
 		this.reviews.add(theReview);
+		
+	}
+	
+	public void addStudent(Student theStudent) {
+
+		if(this.students == null) {
+			this.students = new ArrayList<>();
+		}
+		
+		this.students.add(theStudent);
 		
 	}
 	
