@@ -10,7 +10,7 @@ import com.hibernate.demo.entity.InstructorDetail;
 import com.hibernate.demo.entity.Review;
 import com.hibernate.demo.entity.Student;
 
-public class CreateCourseAndStudentDemo {
+public class CreateCourseForRodolfoDemo {
 
 	public static void main(String[] args) {
 		
@@ -32,24 +32,24 @@ public class CreateCourseAndStudentDemo {
 			//START A TRANSACTION
 			session.beginTransaction();
 			
-			//GET RODOLFO FROM THE DATABASE
-			int studentId = 1;
+			// CREATE A COURSE
+			Course tempCourse = new Course("Pacman - How to score 1 millon points");
 			
-			Student tempStudent = session.get(Student.class, studentId);
-			System.out.println("\nLoading courses...");
-			System.out.println("Courses: "+tempStudent.getCourses());
+			//SAVE COURSE - CASCADE
+			session.save(tempCourse);
 			
-			//CREATE COURSES
-			Course tempCourseOne = new Course("N64 - Best strategies");
-			Course tempCourseTwo = new Course("Atari 2600 - Games");
+			//CREATE STUDENTS
+			Student tempStudentOne = new Student("Rodolfo", "Carvajal", "rodolfojcarvajalm@gmail.com");
+			Student tempStudentTwo = new Student("Cesar", "Padron", "cesarpadron@gmail.com");
 			
 			//ADD STUDENT TO THE COURSE
-			tempCourseOne.addStudent(tempStudent);
-			tempCourseTwo.addStudent(tempStudent);
+			tempCourse.addStudent(tempStudentOne);
+			tempCourse.addStudent(tempStudentTwo);
 			
-			//SAVE COURSES
-			session.save(tempCourseOne);
-			session.save(tempCourseTwo);
+			//SAVE STUDENT
+			System.out.println("Saving students....");
+			session.save(tempStudentOne);
+			session.save(tempStudentTwo);
 			
 			//COMMIT TRANSACTION
 			session.getTransaction().commit();
